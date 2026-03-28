@@ -24,6 +24,7 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------
 ## Business Problem Definition
 ### Before touching the data, the following business questions were defined:
+
 How much was spent on digital campaigns in 2023 and what value did they generate?
 
 Which campaign group (Spring, Summer, Fall) delivered the highest ROAS?
@@ -41,7 +42,9 @@ These questions guided metric selection, modelling, and visual design.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ## Dashboard Wireframing
 Before analysis, a low-fidelity wireframe was created in PowerPoint to define:
+
 Page 1 – Performance Overview
+
 KPI cards (Spend, Conversions, Conversion Value, ROAS, CPA)
 
 
@@ -71,7 +74,8 @@ This step ensured the analysis stayed focused and business-driven.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ## Data Import And Cleaning 
-Import Process
+Import Process:
+
 Dataset imported into Excel Power Query
 
 
@@ -97,6 +101,7 @@ The dataset contained mixed date formats:
 
 
 To resolve this:
+
 The Date column was explicitly selected
 
 
@@ -113,6 +118,7 @@ Final format:
 ## Feature Engineering And Data Modelling
 
 ### Calendar Table Creation (Power Pivot)
+
 A dedicated Calendar (Date) table was created to enable time intelligence.
 Calendar Table Fields
 Date
@@ -131,6 +137,7 @@ Year-Month
 
 
 ### Relationship Modeling
+
 Calendar[Date] → FactTable[Date]
 
 
@@ -153,19 +160,23 @@ Total Spend
 
 Total Conversions
 ```Total Conversions = SUM(FactTable[Conversions])```
+
 The number of completed actions, indicating how much customer response the campaigns generated.
 
 
 Conversion Value
 ```Total Conversion Value = SUM(FactTable[Conversion Value])```
+
 The total revenue from conversions, showing the actual business impact of campaign activity.
 
 ROAS (Return on Ad Spend)
 ```ROAS = DIVIDE([Total Conversion Value], [Total Spend])```
+
 Measures how much revenue is earned per unit of spend, revealing whether campaigns are profitable.
 
 CPA (Cost Per Acquisition)
 ```CPA = DIVIDE([Total Spend], [Total Conversions])```
+
 Show the average cost to acquire a customer, indicating how expensive it is to drive conversions.
 
 While conversions shows volume. ROAS and CPA reveal whether that volume is being achieved efficiently and profitably.
@@ -214,6 +225,7 @@ Previous Month ROAS
 ``PM ROAS = CALCULATE( [ROAS], FILTER( ALL('Calendar'), 'Calendar'[Date] = EOMONTH(MAX('Calendar'[Date]), -1) ) )``
 
 Same logic applied to:
+
 Conversions
 
 
@@ -228,7 +240,9 @@ CPA
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Answering Business Questions
+
 Pivot tables were used to answer each question:
+
 Campaign Group × ROAS
 
 
@@ -265,6 +279,7 @@ Report Period: January – December 2023
 
 
 Overall, the digital marketing accounts maintained high health and efficiency throughout 2023. With a total spend of £163,181.00, the campaigns generated £1,731,700.26 in conversion value, resulting in an annual ROAS of £10.61. Most importantly, the account demonstrated "efficient scaling"—a 6.78% increase in spend was met with a 7.85% increase in conversions, indicating that the target audience is not yet saturated.
+
 ### Key Performance Insights
 
 ### 1. Seasonal Efficiency Disparity
